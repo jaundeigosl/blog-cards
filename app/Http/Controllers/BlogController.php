@@ -86,14 +86,14 @@ class BlogController extends Controller
 
         $idToDelete = $request->input('idToDelete');
 
-        for($i = 0; $i < sizeof($cardsList); $i++){
-            $card = $cardsList[$i];
-            if($card['id']==$idToDelete){
-                $index = $i;
+
+        foreach($cardsList as $card => $value){
+            if($value['id']==$idToDelete){
+                $key = $card;
             }
         }
 
-        unset($cardsList[$index]);
+        unset($cardsList[$key]);
 
         session(['cardsList'=>$cardsList]);
  
