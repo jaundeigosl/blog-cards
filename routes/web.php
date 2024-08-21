@@ -11,4 +11,6 @@ Route::match(['get','post'],'blog',[BlogController::class,'index'])->name('blog'
 
 Route::post('specific-post',[BlogController::class,'specificPost'])->name('specific-post');
 
-Route::match(['post','get'],'create-post',[BlogController::class,'createPost'])->name('create-post');
+Route::get('create-post',[BlogController::class,'createPost'])->name('create-post');
+
+Route::delete('blog',[BlogController::class , 'deletePost'])->name('delete-post');

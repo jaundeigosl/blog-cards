@@ -20,12 +20,10 @@ class BlogRepository
 
     public function getInfoBlog($id, $name, $description, $btn){
         $data = [
-            [
-                'id' => $id,
-                'name' => $name,
-                'description' => $description,
-                'btn' => $btn
-            ]
+            'id' => $id,
+            'name' => $name,
+            'description' => $description,
+            'btn' => $btn
         ];
 
         return $data;

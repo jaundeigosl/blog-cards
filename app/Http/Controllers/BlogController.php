@@ -16,18 +16,35 @@ class BlogController extends Controller
         $cardsList = [];
         $data = $request->all();
 
-
+        
         if(!empty($data)){
 
             $info = new BlogRepository($request);
 
             $cards = $info->getInfoBlog($data['id'],$data['name'],$data['description'],$data['btn']);
 
+
             if(session('cardsList')!=null){
                 $cardsList = session('cardsList');
-            }
+    
+                $existe = false;
+                
+                foreach($cardsList as $card){
+                    if($card['id']==$cards['id']){
+ 
+                        $existe = true;
+                    }
+                    
+                }
 
-            array_push($cardsList,$cards);
+                if(!$existe){
+                    array_push($cardsList,$cards);
+                }
+
+            }else{
+
+                array_push($cardsList,$cards);
+            }
 
             session(['cardsList' => $cardsList]);
         }    
@@ -47,9 +64,30 @@ class BlogController extends Controller
     'description' => $description,]);
     }
 
-    public function createPost(Request $request){
+    public function createPost(){
         
         return view('blog.create-post');
+    }
+
+    public function deletePost(Request $request){
+
+        $cardsList = session('cardsList');
+
+        $idToDelete = $request->input('idToDelete');
+
+        for($i = 0; $i < sizeof($cardsList); $i++){
+            $card = $cardsList[$i];
+            if($card['id']==$idToDelete){
+                $index = $i;
+            }
+        }
+
+        unset($cardsList[$index]);
+
+        session(['cardsList'=>$cardsList]);
+ 
+        return view('blog.blog-list',['newCollection' => $cardsList]);
+        
     }
 
 }
