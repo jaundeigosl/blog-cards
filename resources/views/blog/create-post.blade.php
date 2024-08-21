@@ -10,19 +10,19 @@
         <div class="col-3 d-flex flex-column justify-content-center">
             <div class="mb-3">
                 <label for="id" class="d-block">Id</label>
-                <input type="text" class="form-control" name="id" id="id">
+                <input type="text" class="form-control" name="id" id="id" value="{{$idActual}}">
             </div>
             <div class="mb-3">
                 <label for="name" class="d-block">Título</label>
-                <input type="text" class="form-control" name="name" id="name">
+                <input type="text" class="form-control" name="name" id="name" required>
             </div>
             <div class="mb-3">
                 <label for="description" class="d-block">Descripción</label>
-                <input type="text" class="form-control" style="height: 60px;" name="description" id="description">
+                <input type="text" class="form-control" style="height: 60px;" name="description" id="description" required>
             </div>
             <div class="mb-3">
                 <label for="btn" class="d-block">Nombre del boton</label>
-                <input type="text" class="form-control" name="btn" id="btn">
+                <input type="text" class="form-control" name="btn" id="btn" required>
             </div>
             
             <input type="submit" value="Enviar">

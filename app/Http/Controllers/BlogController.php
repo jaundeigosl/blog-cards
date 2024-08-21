@@ -54,19 +54,30 @@ class BlogController extends Controller
 
     public function specificPost(Request $request){
 
+
+
         $id = $request->input('id');
 
-        $name = $request->input('name')[$id-1];
+        $name = $request->input('name');
      
-        $description = $request->input('description')[$id-1];
+        $description = $request->input('description');
 
         return view('blog.specific-post',['name'=> $name,
     'description' => $description,]);
     }
 
-    public function createPost(){
+    public function createPost(Request $request){
+
+        $idActual = 1;
+    
+        if(session('idActual')!=null){
+            $idActual = session('idActual');
+            $idActual++;
+        }
         
-        return view('blog.create-post');
+        session(['idActual' => $idActual]);
+
+        return view('blog.create-post', ['idActual' => $idActual]);
     }
 
     public function deletePost(Request $request){
