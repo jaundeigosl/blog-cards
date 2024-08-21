@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Repositories\BlogRepository;
 use Illuminate\Http\Request;
 
+
+
 class BlogController extends Controller
 {
     public function index(Request $request){
-        $cards = [];
 
+        
+        $cards = [];
+        $cardsList = [];
         $data = $request->all();
+
 
         if(!empty($data)){
 
@@ -18,9 +23,16 @@ class BlogController extends Controller
 
             $cards = $info->getInfoBlog($data['id'],$data['name'],$data['description'],$data['btn']);
 
-        }
+            if(session('cardsList')!=null){
+                $cardsList = session('cardsList');
+            }
 
-        return view('blog.blog-list', ['news'=>$cards,]);
+            array_push($cardsList,$cards);
+
+            session(['cardsList' => $cardsList]);
+        }    
+
+            return view('blog.blog-list', ['newCollection'=>$cardsList]);
     }
 
     public function specificPost(Request $request){
@@ -36,6 +48,7 @@ class BlogController extends Controller
     }
 
     public function createPost(Request $request){
+        
         return view('blog.create-post');
     }
 

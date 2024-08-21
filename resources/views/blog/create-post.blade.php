@@ -24,6 +24,7 @@
                 <label for="btn" class="d-block">Nombre del boton</label>
                 <input type="text" class="form-control" name="btn" id="btn">
             </div>
+            
             <input type="submit" value="Enviar">
         </div>
     </div>
